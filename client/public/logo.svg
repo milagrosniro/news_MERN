@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <!-- Globo terráqueo -->
+  <circle cx="256" cy="256" r="200" fill="#4DA8DA" stroke="#000" stroke-width="10"/>
+  <path d="M256,56 A200,200 0 1,1 256,456 A200,200 0 1,1 256,56 Z" fill="#4DA8DA"/>
+
+  <!-- Líneas del globo -->
+  <path d="M256 56C256 150 256 360 256 456" stroke="#000" stroke-width="8" fill="none"/>
+  <path d="M56 256H456" stroke="#000" stroke-width="8" fill="none"/>
+  <path d="M100 112C256 256 256 256 400 112" stroke="#000" stroke-width="8" fill="none"/>
+  <path d="M100 400C256 256 256 256 400 400" stroke="#000" stroke-width="8" fill="none"/>
+
+  <!-- Cinta roja -->
+  <rect x="106" y="220" width="300" height="70" fill="#D62828" rx="10"/>
+
+  <!-- Texto "NEWS" -->
+  <text x="256" y="265" font-family="Arial, sans-serif" font-size="50" fill="#FFF" text-anchor="middle" dominant-baseline="middle">
+    NEWS
+  </text>
+</svg>
