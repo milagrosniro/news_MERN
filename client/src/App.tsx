@@ -3,22 +3,27 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { io } from "socket.io-client";
 import Spinner from "./components/Header/Spinner";
 import { Layout } from "./components/layout";
+import { ARCHIVE, NEWS } from "./constants";
 import { IArchivedNew, INew } from "./stores/newSlice/newSlice.types";
 import { UseAppStore } from "./stores/useAppStore";
 import ArchivedView from "./views/ArchivedView";
 import IndexView from "./views/IndexView";
 
-const socket = io('http://localhost:4000')
-console.log(socket)
+const BASE_URL = import.meta.env.VITE_URL 
+const socket = io(BASE_URL)
 
 export type NewsUpload = {
-  data: INew[] | [],
-  type: 'news'
+  dataNews: INew[] | [],
+  type: typeof NEWS
 }
 
 export type ArchivedNewsUpload = {
-  data: IArchivedNew[] | [],
-  type: 'news'
+  dataNews: IArchivedNew[] | [],
+  type: typeof ARCHIVE
+}
+
+export interface INewsSocketParam {
+data: ArchivedNewsUpload | NewsUpload
 }
 
 export interface INewsSocket {
@@ -26,8 +31,7 @@ export interface INewsSocket {
 }
 
 export const App = () => {
-  const {uploadedNews, news} = UseAppStore()
-  console.log(news)
+  const {uploadedNews, uploadedArchivedNews} = UseAppStore()
 
   useEffect(()=>{
 
@@ -35,13 +39,13 @@ export const App = () => {
       console.log('Connected with SOCKETIO')
     })
  
-  socket.on('news-updated', (newNews: INewsSocket)=> {
-    console.log('newsss', newNews)
+    socket.on('news-updated', (newNews: ArchivedNewsUpload | NewsUpload )=> {
+
     // eslint-disable-next-line @typescript-eslint/no-unused-expressions
-     uploadedNews(newNews.data as INew[]) 
+     newNews.type === NEWS ? uploadedNews(newNews.dataNews) : uploadedArchivedNews(newNews.dataNews)
   })
-  //  return () => {socket.disconnect()}
-  },[uploadedNews])
+  
+  },[uploadedNews, uploadedArchivedNews])
   return (
     <BrowserRouter>
       <Routes>

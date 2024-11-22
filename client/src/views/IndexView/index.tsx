@@ -12,16 +12,17 @@ const IndexView = () => {
   }, [getNews]);
 
   return (
-    <>
+    <div className="ml-2 mr-2">
+    
     <h1 className=" text-6xl font-extrabold text-red-500 uppercase">News</h1>
     {
       hasNews ? 
       <div className="grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 my-10 gap-10">
       {news.map(n => <NewCard key={n._id} _new={n} titleButton={'Archived'} onclickButton={()=>archiveNew} />)}
       </div> : 
-      <p className=" my-10 text-center text-2xl">No news</p>
+      <p className=" my-10 text-center text-2xl">No news yet</p>
     }
-    </>
+    </div>
   )
 }
 

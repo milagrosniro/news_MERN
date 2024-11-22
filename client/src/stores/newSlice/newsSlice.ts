@@ -1,6 +1,6 @@
 import { StateCreator } from "zustand";
-import { archiveNew, getAllNews, getArchivedNews } from "../../services/newsService";
-import { IArchiveNewParam, INewSlice } from "./newSlice.types";
+import { archiveNew, deleteNew, getAllNews, getArchivedNews } from "../../services/newsService";
+import { IArchivedNew, IArchiveNewParam, IDeleteNewParam, INewSlice } from "./newSlice.types";
 
 export const createNewSlice : StateCreator<INewSlice> = ((set) => ({
     news: [],
@@ -13,7 +13,8 @@ export const createNewSlice : StateCreator<INewSlice> = ((set) => ({
     uploadedNews: (news) =>{
         set(()=>({news}))
     },
-    uploadedArchivedNews: (archivedNews) =>{
+    uploadedArchivedNews: (archivedNews: IArchivedNew[]) =>{
+        
         set(()=>({archivedNews}))
     },
     getArchivedNews: async () => {
@@ -22,5 +23,8 @@ export const createNewSlice : StateCreator<INewSlice> = ((set) => ({
     },
     archiveNew: async ({id, body}: IArchiveNewParam) => {
          await archiveNew({id,body});
+    },
+    deleteNew: async ({id, type} : IDeleteNewParam) =>{
+        await deleteNew({id,type})
     }
 }))

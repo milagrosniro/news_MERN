@@ -1,3 +1,5 @@
+import { ARCHIVED, NEWS } from "../../constants";
+
 export interface INew {
     title: string;
     description: string;
@@ -21,13 +23,19 @@ export interface IArchiveNewParam{
     body: IBodyParam
 } 
 
+export interface IDeleteNewParam {
+    id: INew['_id'],
+    type: typeof ARCHIVED | typeof NEWS
+}
+
 export interface INewSlice {
     news: INew[] | [],
     newSelected: INew | null,
     archivedNews: IArchivedNew[] | []
     getNews: () => Promise<void>,
     uploadedNews: (news: INew[] | []) => void,
-    uploadedArchivedNews: (IArchivedNew: IArchivedNew[] | []) => void,
+    uploadedArchivedNews: (archivedNews: IArchivedNew[]) => void,
     getArchivedNews: () => Promise<void>,
-    archiveNew : ({id,body}:IArchiveNewParam) => Promise<void>
+    archiveNew : ({id,body}:IArchiveNewParam) => Promise<void>,
+    deleteNew : ({id, type} : IDeleteNewParam) => Promise<void>
 }

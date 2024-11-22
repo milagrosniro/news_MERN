@@ -1,5 +1,6 @@
 import { Router } from "express";
 import { param } from "express-validator";
+import { ARCHIVED, NEWS } from "../constants";
 import { NewNewsController } from "../controllers/newNews";
 import { validateNew } from "../middlewares/news";
 import { handleInputErrors } from "../middlewares/validation";
@@ -21,8 +22,9 @@ newNewsRoutes.patch(
   NewNewsController.updateNew
 );
 newNewsRoutes.delete(
-  "/:id",
+  "/:id/:type",
   param("id").isMongoId().withMessage("Not valid ID"),
+  param('type').isIn([NEWS, ARCHIVED]).withMessage(`Type must be either '${NEWS}' or '${ARCHIVED}'`),
   handleInputErrors,
   NewNewsController.deleteNew
 );

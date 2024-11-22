@@ -5,7 +5,7 @@ const Button = ({title, onclick, id, body}: IButtonProps) => {
     <button
     type='button'
     onClick={()=> onclick({id, body})}
-    className='bg-cyan-600 hover:bg-cyan-500 mt-5 w-full font-bold text-white text-lg'>
+    className='bg-cyan-600 hover:bg-cyan-500 mt-5 w-100 font-bold text-white text-lg'>
         {title}
     </button>
   )

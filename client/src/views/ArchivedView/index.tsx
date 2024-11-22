@@ -11,7 +11,7 @@ const ArchivedView = () => {
   },[])
 
   return (
-    <>
+    <div className="ml-2 mr-2">
     <h1 className=" text-6xl font-extrabold text-red-500 uppercase">Archived News</h1>
     {
       hasArchivedNews ? 
@@ -19,9 +19,9 @@ const ArchivedView = () => {
       {archivedNews.map(n => <NewCard key={n._id} _new={n} titleButton={'Unarchive'} onclickButton={()=>archiveNew}
       />)}
       </div> : 
-      <p className=" my-10 text-center text-2xl">No news</p>
+      <p className=" my-10 text-center text-2xl">No news yet</p>
     }
-    </>
+    </div>
   )
 }
 
